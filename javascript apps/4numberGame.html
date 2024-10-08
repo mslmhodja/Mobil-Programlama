@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4 Basamaklı Sayı Tahmin Oyunu</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        input { margin: 5px; }
+        .result { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>4 Basamaklı Sayı Tahmin Oyunu</h1>
+    <p>Rakamlardan oluşan 4 basamaklı bir sayı tahmin edin (0-9, rakamlar farklı olmalı).</p>
+    <input type="text" id="guess" maxlength="4" placeholder="Tahmininizi girin">
+    <button onclick="checkGuess()">Tahmin Et</button>
+
+    <div class="result" id="result"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
