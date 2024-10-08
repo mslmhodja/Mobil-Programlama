@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Sign Up Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .form-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background: #218838;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>User Sign Up</h2>
+    <form id="signupForm">
+        <div class="form-group">
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname" name="firstname" required>
+        </div>
+        <div class="form-group">
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" name="surname" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="birthDay">Birth Day:</label>
+            <select id="birthDay" name="birthDay" required>
+                <option value="">Day</option>
+                <!-- Generate days -->
+                <script>
+                    for (let i = 1; i <= 31; i++) {
+                        document.write(`<option value="${i}">${i}</option>`);
+                    }
+                </script>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="birthMonth">Birth Month:</label>
+            <select id="birthMonth" name="birthMonth" required>
+                <option value="">Month</option>
+                <script>
+                    const months = [
+                        "January", "February", "March", "April", "May", "June", 
+                        "July", "August", "September", "October", "November", "December"
+                    ];
+                    months.forEach((month, index) => {
+                        document.write(`<option value="${index + 1}">${month}</option>`);
+                    });
+                </script>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="birthYear">Birth Year:</label>
+            <select id="birthYear" name="birthYear" required>
+                <option value="">Year</option>
+                <script>
+                    const currentYear = new Date().getFullYear();
+                    for (let i = currentYear; i >= 1900; i--) {
+                        document.write(`<option value="${i}">${i}</option>`);
+                    }
+                </script>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+        </div>
+        <div class="form-group">
+            <button type="submit">Sign Up</button>
+        </div>
+        <div id="message" style="color: green;"></div>
+        <div class="error" id="errorMessage"></div>
+    </form>
+</div>
+
+<script>
+    document.getElementById('signupForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Get the values from the form
+        const firstname = document.getElementById('firstname').value;
+        const surname = document.getElementById('surname').value;
+        const email = document.getElementById('email').value;
+        const birthDay = document.getElementById('birthDay').value;
+        const birthMonth = document.getElementById('birthMonth').value;
+        const birthYear = document.getElementById('birthYear').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        // Basic validation
+        const errorMessage = document.getElementById('errorMessage');
+        errorMessage.innerText = '';
+        
+        if (password !== confirmPassword) {
+            errorMessage.innerText = 'Passwords do not match!';
+            return;
+        }
+
+        // Display a success message
+        document.getElementById('message').innerText = `Sign up successful for ${firstname} ${surname}!`;
+
+        // Clear the form fields
+        this.reset();
+    });
+</script>
+
+</body>
+</html>
