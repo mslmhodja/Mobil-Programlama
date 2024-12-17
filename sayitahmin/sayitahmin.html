@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayı Tahmin Oyunu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .menu, .game, .help {
+            display: none;
+        }
+        .menu.active, .game.active, .help.active {
+            display: block;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .history {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .history ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .history li {
+            padding: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu active">
+        <h1>SAYI TAHMİN OYUNU</h1>
+        <p>-----------------</p>
+        <button onclick="startGame()">1 - Yeni Oyun</button><br>
+        <button onclick="showHelp()">2 - Yardım</button><br>
+        <button onclick="exitGame()">3 - Çıkış</button>
+    </div>
+
+    <div class="game">
+        <h2>Oyun Başladı</h2>
+        <p>4 basamaklı rakamları birbirinden farklı bir sayı tuttum!</p>
+        <input type="text" id="guessInput" placeholder="Tahmininizi girin" maxlength="4">
+        <button onclick="makeGuess()">Tahmin Yap</button>
+        <p id="result"></p>
+        <div class="history">
+            <h3>Tahmin Geçmişi:</h3>
+            <ul id="guessHistory"></ul>
+        </div>
+        <button onclick="backToMenu()">Menüye Dön</button>
+    </div>
+
+    <div class="help">
+        <h2>Yardım</h2>
+        <p>Bu oyun, 4 basamaklı rakamları birbirinden farklı bir sayı tahmin etme oyunudur. Doğru tahmin yapmaya çalışın!</p>
+        <button onclick="backToMenu()">Menüye Dön</button>
+    </div>
+<audio id="istiklalMars" src="istiklal_marsi.mp3"></audio>
+    <script>
+        let number = '';
+        let guessedCorrectly = false;
+        let history = []; // Tahmin geçmişi
+
+        function startGame() {
+            document.querySelector('.menu').classList.remove('active');
+            document.querySelector('.game').classList.add('active');
+            number = generateNumber();
+            guessedCorrectly = false;
+            history = []; // Geçmişi sıfırla
+            updateHistory();
+            document.getElementById('result').innerText = '';
+            document.getElementById('guessInput').value = '';
+            console.log('Tuttuğum sayı:', number); // Hile: Tuttuğum sayı konsolda yazılı
+        }
+
+        function showHelp() {
+            document.querySelector('.menu').classList.remove('active');
+            document.querySelector('.help').classList.add('active');
+        }
+
+        function exitGame() {
+            alert('Güle Güle!');
+            exitGame();
+        }
+
+        function backToMenu() {
+            document.querySelector('.game').classList.remove('active');
+            document.querySelector('.help').classList.remove('active');
+            document.querySelector('.menu').classList.add('active');
+        }
+
+        function generateNumber() {
+            const digits = [];
+            while (digits.length < 4) {
+                const rand = Math.floor(Math.random() * 10).toString();
+                if (!digits.includes(rand)) {
+                    digits.push(rand);
+                }
+            }
+            return digits.join('');
+        }
+
+        function makeGuess() {
+            const guess = document.getElementById('guessInput').value;
+            if (guess.length !== 4 || !/^\d+$/.test(guess) || new Set(guess).size !== 4) {
+                document.getElementById('result').innerText = 'Lütfen 4 basamaklı rakamları farklı bir sayı girin.';
+                return;
+            }
+
+            let exact = 0;
+            let misplaced = 0;
+
+            for (let i = 0; i < 4; i++) {
+                if (guess[i] === number[i]) {
+                    exact++;
+                } else if (number.includes(guess[i])) {
+                    misplaced++;
+                }
+            }
+
+            history.push({
+                guess,
+                exact,
+                misplaced
+            });
+            updateHistory();
+
+            if (exact === 4) {
+                guessedCorrectly = true;
+                document.getElementById('result').innerText = 'Tebrikler! Doğru tahmin ettiniz.';
+                // İstiklal Marşı'nı çalma
+        const audio = document.getElementById('istiklalMars');
+        audio.play();
+            } else {
+                document.getElementById('result').innerText = 
+                    `Alt Alta Tutan: ${exact}, Farklı Yerlerde Tutan: ${misplaced}`;
+            }
+        }
+
+        function updateHistory() {
+            const historyList = document.getElementById('guessHistory');
+            historyList.innerHTML = '';
+            history.forEach((entry, index) => {
+                const listItem = document.createElement('li');
+                listItem.innerText = `Tahmin ${index + 1}: ${entry.guess} - Alt Alta: ${entry.exact}, Farklı Yerlerde: ${entry.misplaced}`;
+                historyList.appendChild(listItem);
+            });
+        }
+        function exitGame() {
+    const confirmation = confirm('Bu sekmeyi kapatmak istediğinize emin misiniz?');
+    if (confirmation) {
+        window.close(); // Sekmeyi kapatmayı dener
+    } else {
+        alert('Çıkış iptal edildi.');
+    }
+}
+
+    </script>
+</body>
+</html>
