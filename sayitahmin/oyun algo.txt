@@ -1,0 +1,77 @@
+Algoritma: Sayı Tahmin Oyunu
+1. Menü Gösterme
+Başlangıçta ana menü ekranda görünür.
+Kullanıcı aşağıdaki seçeneklerden birini seçer:
+1 - Yeni Oyun: Oyuna başlar.
+2 - Yardım: Oyunun kurallarını gösterir.
+3 - Çıkış: Oyunu sonlandırır.
+2. Oyun Başlama
+Yeni Oyun seçeneği seçilirse:
+Gizli bir sayı oluşturulur:
+4 basamaklı ve rakamları birbirinden farklı rastgele bir sayı (generateNumber).
+Tahmin geçmişi temizlenir.
+Kullanıcıdan tahmin almayı bekleyen bir oyun ekranı açılır.
+3. Tahmin Al
+Kullanıcı bir tahmin yapar:
+Girdi doğrulanır:
+4 basamaklı olmalı.
+Tüm rakamlar birbirinden farklı olmalı.
+Sadece rakamlardan oluşmalı.
+Geçerli değilse, hata mesajı gösterilir ve kullanıcıdan yeniden tahmin yapması istenir.
+4. Tahmini Karşılaştır
+Kullanıcı tahmini, gizli sayıyla karşılaştırılır:
+Alt Alta Tutan (exact): Doğru pozisyondaki doğru rakamların sayısı bulunur.
+Farklı Yerlerde Tutan (misplaced): Yanlış pozisyondaki doğru rakamların sayısı bulunur.
+Tahmin sonucu bir nesne olarak geçmişe kaydedilir:
+Tahmin edilen sayı.
+Alt Alta Tutan rakam sayısı.
+Farklı Yerlerde Tutan rakam sayısı.
+5. Sonucu Göster
+Kullanıcıya tahminin sonucu gösterilir:
+Alt Alta Tutan ve Farklı Yerlerde Tutan rakamların sayısı.
+Tahmin geçmişi güncellenir ve ekranda gösterilir.
+6. Kazanma Durumu
+Eğer Alt Alta Tutan rakam sayısı = 4 ise:
+Kullanıcıya "Tebrikler! Doğru tahmin ettiniz." mesajı gösterilir.
+Oyun sona erer ve menüye dönme seçeneği sunulur.
+Eğer kazanmadıysa, kullanıcıdan tekrar tahmin yapması istenir.
+7. Yardım Gösterme
+Kullanıcı 2 - Yardım seçeneğini seçerse:
+Oyunun kuralları ve nasıl oynanacağı hakkında bilgi gösterilir.
+Kullanıcı menüye dönebilir.
+8. Oyundan Çıkış
+Kullanıcı 3 - Çıkış seçeneğini seçerse:
+"Güle Güle!" mesajı gösterilir ve oyun kapatılır.
+Fonksiyonel Parçalar
+1. Gizli Sayı Oluşturma (generateNumber)
+4 benzersiz rakamdan oluşan bir sayı oluşturur.
+2. Tahmin Yapma (makeGuess)
+Kullanıcının tahminini alır ve geçerli olup olmadığını kontrol eder.
+Tahmini, gizli sayıyla karşılaştırır.
+3. Tahmini Karşılaştırma
+exact ve misplaced değerlerini hesaplar.
+4. Geçmişi Güncelleme (updateHistory)
+Her tahminin sonucunu ekler ve tahmin geçmişini ekranda gösterir.
+5. Menüye Dönüş
+Kullanıcının istediği zaman menüye dönmesine olanak tanır.
+Algoritma Akış Şeması
+Başlangıç:
+Menü göster.
+Menüden Seçim:
+"Yeni Oyun" -> Gizli sayı oluştur, oyuna başla.
+"Yardım" -> Yardım ekranını göster.
+"Çıkış" -> Oyunu sonlandır.
+Oyun Döngüsü:
+Kullanıcı tahmin yapar.
+Tahmin geçerliyse karşılaştır:
+Alt Alta Tutan rakamları bul.
+Farklı Yerlerde Tutan rakamları bul.
+Tahmin geçmişini güncelle ve göster.
+Eğer doğru tahmin yapıldıysa:
+Kazanma mesajı göster.
+Menüye dön.
+Menüye Dönüş:
+Kullanıcı tekrar seçim yapar.
+Sonlandır:
+Oyun kapatılır.
+Bu algoritma, kullanıcı dostu bir oyun deneyimi sunar ve tahmin geçmişi gibi özelliklerle daha etkileşimli hale gelir.
